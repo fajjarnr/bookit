@@ -14,13 +14,13 @@ function RoomItem({ room }) {
         <div className="card-body d-flex flex-column">
           <h5 className="card-title">
             <Link href={`/room/${room._id}`}>
-              <a>{room.name}</a>
+              <a target="_blank">{room.name}</a>
             </Link>
           </h5>
 
           <div className="ratings mt-auto mb-3">
             <p className="card-text">
-              <b>{room.pricePerNight}</b> / night
+              <b>{room.pricePerNight}$</b> / night
             </p>
 
             <div className="rating-outer">
@@ -34,7 +34,7 @@ function RoomItem({ room }) {
 
           <button className="btn btn-block view-btn">
             <Link href={`/room/${room._id}`}>
-              <a>View Details</a>
+              <a target="_blank">View Details</a>
             </Link>
           </button>
         </div>

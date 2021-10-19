@@ -4,21 +4,45 @@ import {
   ALL_ROOMS_FAIL,
   ALL_ROOMS_SUCCESS,
   CLEAR_ERROR,
+  ROOM_DETAILS_FAIL,
+  ROOM_DETAILS_SUCCESS,
 } from '../constants/room';
 
-export const getRooms = (req) => async (dispatch) => {
+export const getRooms =
+  (req, currentPage = 1) =>
+  async (dispatch) => {
+    try {
+      const { origin } = absoluteUrl(req);
+
+      const { data } = await axios.get(
+        `${origin}/api/rooms?page=${currentPage}`
+      );
+
+      dispatch({
+        type: ALL_ROOMS_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ALL_ROOMS_FAIL,
+        payload: error?.response?.data?.message,
+      });
+    }
+  };
+
+export const getRoomsDetails = (req, id) => async (dispatch) => {
   try {
     const { origin } = absoluteUrl(req);
 
-    const { data } = await axios.get(`${origin}/api/rooms`);
+    const { data } = await axios.get(`${origin}/api/rooms/${id}`);
 
     dispatch({
-      type: ALL_ROOMS_SUCCESS,
-      payload: data,
+      type: ROOM_DETAILS_SUCCESS,
+      payload: data.room,
     });
   } catch (error) {
     dispatch({
-      type: ALL_ROOMS_FAIL,
+      type: ROOM_DETAILS_FAIL,
       payload: error?.response?.data?.message,
     });
   }

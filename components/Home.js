@@ -1,26 +1,68 @@
 import { useSelector } from 'react-redux';
 import RoomItem from './room/RoomItem';
+import Pagination from 'react-js-pagination';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { clearError } from '../redux/actions/room';
 
 function Home() {
-  const { rooms } = useSelector((state) => state.allRooms);
+  const router = useRouter();
+
+  const dispatch = useDispatch();
+
+  const { rooms, error, resPerPage, roomsCount, filteredRoomsCount } =
+    useSelector((state) => state.allRooms);
+
+  useEffect(() => {
+    toast.error(error);
+    dispatch(clearError());
+  }, []);
+
+  let { page = 1 } = router.query;
+  page = Number(page);
+
+  const handlePagination = (pageNumber) => {
+    window.location.href = `/?page=${pageNumber}`;
+  };
 
   return (
-    <section id="rooms" className="container mt-5">
-      <h2 className="mb-3 ml-2 stays-heading">Stays in New York</h2>
+    <>
+      <section id="rooms" className="container mt-5">
+        <h2 className="mb-3 ml-2 stays-heading">Stays in New York</h2>
 
-      <a href="#" className="ml-2 back-to-search">
-        <i className="fa fa-arrow-left"></i> Back to Search
-      </a>
-      <div className="row">
-        {rooms?.length > 0 ? (
-          rooms.map((room) => <RoomItem key={room._id} room={room} />)
-        ) : (
-          <div className="alert alert-danger">
-            <b>No Rooms</b>
-          </div>
-        )}
-      </div>
-    </section>
+        <a href="#" className="ml-2 back-to-search">
+          <i className="fa fa-arrow-left"></i> Back to Search
+        </a>
+        <div className="row">
+          {rooms?.length > 0 ? (
+            rooms.map((room) => <RoomItem key={room._id} room={room} />)
+          ) : (
+            <div className="alert alert-danger">
+              <b>No Rooms</b>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {resPerPage < roomsCount && (
+        <div className="d-flex justify-content-center mt-5">
+          <Pagination
+            activePage={page}
+            itemsCountPerPage={resPerPage}
+            totalItemsCount={roomsCount}
+            onChange={handlePagination}
+            nextPageText={'Next'}
+            prevPageText={'Prev'}
+            firstPageText={'First'}
+            lastPageText={'Last'}
+            itemClass="page-item"
+            linkClass="page-link"
+          />
+        </div>
+      )}
+    </>
   );
 }
 
