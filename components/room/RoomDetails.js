@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Carousel } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,6 +11,12 @@ import { clearError } from '../../redux/actions/room';
 import RoomFeatures from './RoomFeatures';
 
 function RoomDetails() {
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
+
   const dispatch = useDispatch();
 
   const { room, error } = useSelector((state) => state.roomDetails);
@@ -40,7 +46,12 @@ function RoomDetails() {
           <span id="no_of_reviews">({room.numOfReviews} Reviews)</span>
         </div>
 
-        <Carousel hover="pause">
+        <Carousel
+          activeIndex={index}
+          onSelect={handleSelect}
+          interval={3000}
+          hover="pause"
+        >
           {room.images &&
             room.images.map((image) => (
               <Carousel.Item key={image.public_id}>
