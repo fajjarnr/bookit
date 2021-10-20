@@ -9,7 +9,7 @@ function RoomItem({ room }) {
           className="card-img-top mx-auto"
           src={room.images[0].url}
           height={170}
-          width=""
+          width={190}
         />
         <div className="card-body d-flex flex-column">
           <h5 className="card-title">
