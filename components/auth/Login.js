@@ -1,10 +1,8 @@
-import Link from 'next/link';
-import { useState } from 'react';
-
 import { signIn } from 'next-auth/client';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
-
 import ButtonLoader from '../layout/ButtonLoader';
+import Link from 'next/link';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -72,9 +70,9 @@ function Login() {
               {loading ? <ButtonLoader /> : 'LOGIN'}
             </button>
 
-            <a href="#" className="float-right mt-3">
-              New User?
-            </a>
+            <Link href="/register">
+              <a className="float-right mt-3">New User?</a>
+            </Link>
           </form>
         </div>
       </div>

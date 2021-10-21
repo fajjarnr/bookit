@@ -1,11 +1,11 @@
 import { getSession } from 'next-auth/client';
-import Login from '../components/auth/Login';
+import Register from '../components/auth/Register';
 import Layout from '../components/layout/Layout';
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <Layout title="login">
-      <Login />
+      <Register />
     </Layout>
   );
 }
@@ -23,6 +23,6 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: { session },
+    props: {},
   };
 }
