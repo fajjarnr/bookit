@@ -21,16 +21,16 @@ function Search() {
   };
 
   return (
-    <div class="container container-fluid">
-      <div class="row wrapper">
-        <div class="col-10 col-lg-5">
-          <form class="shadow-lg" onSubmit={submitHandler}>
-            <h2 class="mb-3">Search Rooms</h2>
-            <div class="form-group">
+    <div className="container container-fluid">
+      <div className="row wrapper">
+        <div className="col-10 col-lg-5">
+          <form className="shadow-lg" onSubmit={submitHandler}>
+            <h2 className="mb-3">Search Rooms</h2>
+            <div className="form-group">
               <label htmlFor="location_field">Location</label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="location_field"
                 placeholder="new york"
                 value={location}
@@ -38,10 +38,10 @@ function Search() {
               />
             </div>
 
-            <div className="form-group">
+            <div classNameName="form-group">
               <label htmlFor="guest_field">No. of Guests</label>
               <select
-                className="form-control"
+                classNameName="form-control"
                 id="guest_field"
                 value={guests}
                 onChange={(e) => setGuests(e.target.value)}
@@ -54,10 +54,10 @@ function Search() {
               </select>
             </div>
 
-            <div className="form-group">
+            <div classNameName="form-group">
               <label htmlFor="room_type_field">Room Type</label>
               <select
-                className="form-control"
+                classNameName="form-control"
                 id="room_type_field"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
@@ -70,7 +70,7 @@ function Search() {
               </select>
             </div>
 
-            <button type="submit" class="btn btn-block py-2">
+            <button type="submit" className="btn btn-block py-2">
               Search
             </button>
           </form>

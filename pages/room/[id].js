@@ -5,8 +5,8 @@ import Layout from '../../components/layout/Layout';
 
 export default function RoomDetailsPage() {
   return (
-    <Layout>
-      <RoomDetails title="Room Detail" />
+    <Layout title="Room Detail">
+      <RoomDetails />
     </Layout>
   );
 }
